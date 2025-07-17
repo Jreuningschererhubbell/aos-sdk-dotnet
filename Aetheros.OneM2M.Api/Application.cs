@@ -188,11 +188,11 @@ namespace Aetheros.OneM2M.Api
 			}
 			Trace.WriteLine($"Did not find container '{name}'... ");
 
-			// If the primitive exists and is an AE, we do not need to recreate it. 
+			// If the primitive exists and is an AE, we do not need to recreate it.
 			var primAE = prim?.AE;
 			if (primAE != null)
 			{
-				// We don't need to return a container, we can just return null 
+				// We don't need to return a container, we can just return null
 				return null;
 			}
 
