@@ -160,7 +160,10 @@ namespace Aetheros.OneM2M.Api
 				return null;
 
 			Trace.WriteLine($"Looking for container '{name}'");
-			var container = (await TryGetPrimitiveAsync(name))?.Container;
+			var prim = await TryGetPrimitiveAsync(name);
+
+			// If the primitive exists and is a container, we try adding the AccessControlPolicy to it and/or return it
+			var container = prim?.Container;;
 			if (container != null)
 			{
 				if (aclUri != null)
@@ -182,6 +185,15 @@ namespace Aetheros.OneM2M.Api
 					}
 				}
 				return container;
+			}
+			Trace.WriteLine($"Did not find container '{name}'... ");
+
+			// If the primitive exists and is an AE, we do not need to recreate it. 
+			var primAE = prim?.AE;
+			if (primAE != null)
+			{
+				// We don't need to return a container, we can just return null 
+				return null;
 			}
 
 			string parentName = "";
