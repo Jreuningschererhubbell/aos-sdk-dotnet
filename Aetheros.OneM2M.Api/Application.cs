@@ -192,6 +192,7 @@ namespace Aetheros.OneM2M.Api
 			var primAE = prim?.AE;
 			if (primAE != null)
 			{
+				Trace.WriteLine($"Found AE '{name}'");
 				// We don't need to return a container, we can just return null
 				return null;
 			}
